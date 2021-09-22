@@ -1,7 +1,11 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <Tool/>
-  <Canvas/>
+  <Tool
+    @ColorChange = 'Color = $event'
+  />
+  <Canvas 
+    :Color = 'Color'
+  />
 </template>
 
 <script>
@@ -13,6 +17,11 @@ export default {
   components: {
     Canvas,
     Tool
+  },
+  data: function(){
+    return {
+      Color: 'red'
+    }
   }
 }
 </script>

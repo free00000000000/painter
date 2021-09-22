@@ -1,6 +1,7 @@
 <script>
 export default {
   name: 'Canvas',
+  props: ['Color'],
   data: function(){
     return {
       Canvas: null,
@@ -10,8 +11,11 @@ export default {
       isDrawing: false,
     }
   },
-  mounted(){
+  mounted() {
     this.Canvas = this.$refs['drawCanvas']
+    // set size
+    this.setCanvasSize(this.Col*this.Size+1, this.Row*this.Size+1) // +1: bias for width of line
+    // draw
     this.drawGrid(this.Row, this.Col, this.Size, 'lightgrey')
   },
   methods:{
@@ -36,7 +40,8 @@ export default {
       let blk = this.getBlockByLocation(pos.x, pos.y)
       this.drawRectangle(
         {x: blk.x_idx * this.Size, y: blk.y_idx * this.Size},
-        {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, 'red', true)
+        {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, this.Color, false)
+      this.drawGrid(this.Row, this.Col, this.Size, 'lightgrey')
     },
     mouseMove(event){
       if(this.isDrawing){
@@ -44,16 +49,14 @@ export default {
         let blk = this.getBlockByLocation(pos.x, pos.y)
         this.drawRectangle(
           {x: blk.x_idx * this.Size, y: blk.y_idx * this.Size},
-          {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, 'red', true)
+          {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, this.Color, false)
+        this.drawGrid(this.Row, this.Col, this.Size, 'lightgrey')
       }
     },
     mouseUp(){
       this.isDrawing = false
     },
     drawGrid(row, col, size, color){
-      // set canvas size
-      this.setCanvasSize(col*size+1, row*size+1) // +1: bias for width of line
-
       // draw grid
       for(var x = 0; x <= col; ++x){
         this.drawLine(
