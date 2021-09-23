@@ -2,5 +2,15 @@
   <input 
     type="color" 
     value="#ff0000"
-    @change="colorChange">
+    @change="colorChange"/>
+  <input
+    placeholder="Row"
+    @input="rowChange"/>
+  <input
+    placeholder="Column"
+    @input="colChange"/>
+  <input 
+    type="button"
+    value="Clean"
+    @click="clean"/>
 </div>

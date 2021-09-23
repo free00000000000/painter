@@ -2,9 +2,15 @@
   <img alt="Vue logo" src="./assets/logo.png">
   <Tool
     @ColorChange = 'Color = $event'
+    @RowChange = 'Row = parseInt($event)'
+    @ColChange = 'Col = parseInt($event)'
+    @Clean = '$refs.Canvas.cleanCanvas()'
   />
   <Canvas 
+    ref = 'Canvas'
     :Color = 'Color'
+    :Row = 'Row'
+    :Col = 'Col'
   />
 </template>
 
@@ -20,7 +26,9 @@ export default {
   },
   data: function(){
     return {
-      Color: 'red'
+      Color: 'red',
+      Row: 20,
+      Col: 20,
     }
   }
 }

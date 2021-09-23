@@ -9,6 +9,15 @@ export default {
   methods: {
     colorChange(event){
       this.$emit('ColorChange', event.target.value);
+    },
+    rowChange(event){
+      this.$emit('RowChange', event.target.value);
+    },
+    colChange(event){
+      this.$emit('ColChange', event.target.value);
+    },
+    clean(){
+      this.$emit('Clean');
     }
   }
 }
