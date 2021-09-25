@@ -83,6 +83,16 @@ export default {
       // draw
       this.drawGrid(this.Row, this.Col, this.Size, this.GridColor)
     },
+    saveCanvas(){
+      // get image
+      var image = this.Canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      // download
+      var a = document.createElement('a');
+      a.href = image;
+      a.download = 'Image.png';
+      document.body.appendChild(a);
+      a.click();
+    },
     drawGrid(row, col, size, color){
       // draw grid
       for(var x = 0; x <= col; ++x){

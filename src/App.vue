@@ -5,6 +5,7 @@
     @RowChange = 'Row = parseInt($event)'
     @ColChange = 'Col = parseInt($event)'
     @Clean = '$refs.Canvas.cleanCanvas()'
+    @Save = '$refs.Canvas.saveCanvas()'
   />
   <Canvas 
     ref = 'Canvas'
