@@ -10704,6 +10704,7 @@ fsevents@~2.3.2:
     eslint: ^6.7.2
     eslint-plugin-vue: ^7.0.0
     vue: ^3.0.0
+    vue-color-kit: ^1.0.5
   languageName: unknown
   linkType: soft
 
@@ -14239,6 +14240,15 @@ typescript@~4.1.5:
   bin:
     vue-codemod: dist/bin/vue-codemod.js
   checksum: fd113e013d691ef27cf37d1490417233bb452a6b79a1c996c5c9c94f1da5f8d526ff422fa2f129ebdac1ccb389cfb534914f0d7c50741f41656128a4d334f9f5
+  languageName: node
+  linkType: hard
+
+"vue-color-kit@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "vue-color-kit@npm:1.0.5"
+  peerDependencies:
+    vue: ^3.0.5
+  checksum: d0051ac98ed56c9729b07ff773887b3250b7474397e88c3c34af1c96b64fbeaaf387bf6da9f9fc6973428b2c737047ed38faf7b772a699bf84545fdcb9ca5cee
   languageName: node
   linkType: hard
 

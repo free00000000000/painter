@@ -13,7 +13,8 @@
     "@vue/cli": "^4.5.13",
     "@vue/cli-service-global": "^4.5.13",
     "core-js": "^3.6.5",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-color-kit": "^1.0.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

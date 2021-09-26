@@ -8,22 +8,25 @@
   border-radius: 20px;
   border: 2px soli;
   text-align: center;
-  width: 100px;
-  height: 26px;
+  width: 8%;
   color: rgb(0, 0, 0);
   font-size: 20px;
-  margin: 1%;
+  margin: 0.5%;
 }
 
 .button {
   border-radius: 20px;
   border: 2px soli;
   text-align: center;
-  width: 50px;
-  height: 36px;
+  width: 4%;
   color: rgb(0, 0, 0);
   background-color: white;
-  font-size: 30px;
+  font-size: 10%;
   cursor: pointer;
-  margin: 1%;
+  margin: 0.5%;
+}
+
+.picker {
+  position: fixed;
+  right: 10%;
 }
