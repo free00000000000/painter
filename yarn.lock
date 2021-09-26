@@ -1472,10 +1472,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jamescoyle/vue-icon@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@jamescoyle/vue-icon@npm:0.1.2"
+  checksum: cb797dd9f6937512f81df83fdf85f703213c19f7d1b3c95a7a56c32cd58486bff1687f1a91f664bfaf21d851c266f688735765e50dc40a9b44ac1a1c5cc33184
+  languageName: node
+  linkType: hard
+
 "@josephg/resolvable@npm:^1.0.0":
   version: 1.0.1
   resolution: "@josephg/resolvable@npm:1.0.1"
   checksum: 64eb763b5138bdae4fb59c0c0e89ed261b690917ae6bd777b533257668f151b8868698fb73dfd7665746ad07c7c917fe89ccfdf2404048d39f373f57f1a14e34
+  languageName: node
+  linkType: hard
+
+"@mdi/js@npm:^6.1.95":
+  version: 6.1.95
+  resolution: "@mdi/js@npm:6.1.95"
+  checksum: 318899617da78956ae1e0650b83be65aa459f7fdb9f45212fe081776016e3b9881d1cf03458f65a5d86a99c3387caad0d87828808bca87e21db7e69706337016
   languageName: node
   linkType: hard
 
@@ -10677,6 +10691,8 @@ fsevents@~2.3.2:
   version: 0.0.0-use.local
   resolution: "painter@workspace:."
   dependencies:
+    "@jamescoyle/vue-icon": ^0.1.2
+    "@mdi/js": ^6.1.95
     "@vue/cli": ^4.5.13
     "@vue/cli-plugin-babel": ~4.5.0
     "@vue/cli-plugin-eslint": ~4.5.0

@@ -1,0 +1,29 @@
+.navbar {
+  margin-bottom: 1px;
+}
+
+.input {
+  position: relative;
+  top: -5px;
+  border-radius: 20px;
+  border: 2px soli;
+  text-align: center;
+  width: 100px;
+  height: 26px;
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  margin: 1%;
+}
+
+.button {
+  border-radius: 20px;
+  border: 2px soli;
+  text-align: center;
+  width: 50px;
+  height: 36px;
+  color: rgb(0, 0, 0);
+  background-color: white;
+  font-size: 30px;
+  cursor: pointer;
+  margin: 1%;
+}

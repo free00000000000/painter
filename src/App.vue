@@ -1,5 +1,4 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
   <Tool
     @ColorChange = 'Color = $event'
     @RowChange = 'Row = parseInt($event)'

@@ -1,20 +1,21 @@
-<div>
+<div class="navbar">
   <input 
-    type="color" 
-    value="#ff0000"
-    @change="colorChange"/>
+  type="color" 
+  value="#ff0000"
+  @change="colorChange"/>
+  
   <input
-    placeholder="Row"
-    @input="rowChange"/>
+  class="input"
+  placeholder="Row"
+  @input="rowChange"/>
   <input
-    placeholder="Column"
-    @input="colChange"/>
-  <input 
-    type="button"
-    value="Clean"
-    @click="clean"/>
-  <input
-    type="button"
-    value="Save"
-    @click="save"/>
+  class="input"
+  placeholder="Column"
+  @input="colChange"/>
+  <button @click="clean" class="button">
+    <svg-icon type="mdi" :path="mid_clean"/>
+  </button>
+  <button @click="save" class="button">
+    <svg-icon type="mdi" :path="mid_save"/>
+  </button>
 </div>

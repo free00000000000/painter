@@ -1,9 +1,18 @@
 <script>
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiContentSave } from '@mdi/js';
+import { mdiDelete } from '@mdi/js';
+
 export default {
   name: 'Tool',
+  components: {
+		SvgIcon
+	},
   data: function(){
     return {
       CurrentColor: 'red', // current color
+      mid_save: mdiContentSave,
+      mid_clean: mdiDelete,
     }
   },
   methods: {
