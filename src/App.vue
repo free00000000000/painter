@@ -5,12 +5,15 @@
     @ColChange = 'Col = parseInt($event)'
     @Clean = '$refs.Canvas.cleanCanvas()'
     @Save = '$refs.Canvas.saveCanvas()'
+    @ModeChange = 'modeChange($event)'
   />
   <Canvas 
     ref = 'Canvas'
     :Color = 'Color'
     :Row = 'Row'
     :Col = 'Col'
+    :isMoving = 'isMoving'
+    :Mode = 'Mode'
   />
 </template>
 
@@ -29,8 +32,19 @@ export default {
       Color: 'red',
       Row: 20,
       Col: 20,
+      isMoving: false,
+      Mode: 'Draw'
     }
-  }
+  },
+  methods: {
+    modeChange(val){
+      if(this.Mode === 'Draw'){
+        this.Mode = val
+      }else if(this.Mode === 'Move'){
+        this.Mode = 'Draw'
+      }
+    },
+  },
 }
 </script>
 

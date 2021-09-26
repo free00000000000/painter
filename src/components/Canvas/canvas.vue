@@ -1,14 +1,15 @@
 <script>
 export default {
   name: 'Canvas',
-  props: ['Color', 'Row', 'Col'],
+  props: ['Color', 'Row', 'Col', 'isMoving', 'Mode'],
   data: function(){
     return {
       Canvas: null,
       Size: 20, // each block length of side
-      isDrawing: false,
+      isPress: false,
       BackgroundColor: '#ffffff',
       GridColor: 'lightgrey',
+      MoveOriginBlock: null,
     }
   },
   mounted() {
@@ -50,33 +51,67 @@ export default {
     },
     mouseDown(event){
       event.preventDefault();
-      this.isDrawing = true
-      let pos = this.getClickLocation(event)
-      let blk = this.getBlockByLocation(pos.x, pos.y)
-      console.log(blk);
-      this.drawRectangle(
-        {x: blk.x_idx * this.Size, y: blk.y_idx * this.Size},
-        {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, this.Color, false)
-      this.drawGrid(this.Row, this.Col, this.Size, this.GridColor)
-    },
-    mouseMove(event){
-      event.preventDefault();
-      if(this.isDrawing){
+      this.isPress = true
+
+      if(this.Mode === 'Draw'){
+        // draw color
         let pos = this.getClickLocation(event)
         let blk = this.getBlockByLocation(pos.x, pos.y)
         this.drawRectangle(
           {x: blk.x_idx * this.Size, y: blk.y_idx * this.Size},
           {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, this.Color, false)
         this.drawGrid(this.Row, this.Col, this.Size, this.GridColor)
+      }else if(this.Mode === 'Move'){
+        // record first block
+        let pos = this.getClickLocation(event)
+        let blk = this.getBlockByLocation(pos.x, pos.y)
+        this.MoveOriginBlock = blk;
+      }
+    },
+    mouseMove(event){
+      event.preventDefault();
+      if(this.isPress){
+        if(this.Mode === 'Draw'){
+          // draw color
+          let pos = this.getClickLocation(event)
+          let blk = this.getBlockByLocation(pos.x, pos.y)
+          this.drawRectangle(
+            {x: blk.x_idx * this.Size, y: blk.y_idx * this.Size},
+            {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, this.Color, false)
+          this.drawGrid(this.Row, this.Col, this.Size, this.GridColor)
+        }else if(this.Mode === 'Move'){
+          // check move distance
+          let pos = this.getClickLocation(event)
+          let blk = this.getBlockByLocation(pos.x, pos.y)
+          if(blk !== this.MoveOriginBlock){ // something changed
+            let x_offset = blk.x_idx - this.MoveOriginBlock.x_idx
+            let y_offset = blk.y_idx - this.MoveOriginBlock.y_idx
+            let locate = {x: x_offset * this.Size, y: y_offset * this.Size}
+            this.MoveCanvas(locate)
+            // reset
+            this.MoveOriginBlock = blk;
+          }
+        }
       }
     },
     mouseUp(){
-      this.isDrawing = false
+      this.isPress = false
+      this.MoveOriginBlock = null
     },
     mouseOut(){
-      if(this.isDrawing){
-        this.isDrawing = false
+      if(this.isPress){
+        this.isPress = false
       }
+    },
+    MoveCanvas(locate){
+      // get context
+      let ctx = this.Canvas.getContext('2d')
+      // get present canvas
+      let image = ctx.getImageData(0, 0, this.Canvas.width, this.Canvas.height)
+      // clean canvas
+      this.cleanCanvas()
+      // put canvas
+      ctx.putImageData(image, locate.x, locate.y)
     },
     cleanCanvas(){
       this.drawRectangle({x: 0, y: 0}, {x: this.Canvas.width, y: this.Canvas.height}, this.BackgroundColor, false)

@@ -42,22 +42,25 @@ export default {
     save(){
       this.$emit('Save')
     },
+    move(){
+      this.$emit('ModeChange', 'Move')
+    },
     changeColor(color) {
-        const { r, g, b, a } = color.rgba
-        this.color = `rgba(${r}, ${g}, ${b}, ${a})`
-        this.$emit('ColorChange', this.color)
-        this.currentcolor['background-color'] = this.color
-      },
-      openSucker(isOpen) {
-        // https://vuejsexamples.com/a-lightweight-color-picker-for-vue-3/
-        if (isOpen) {
-          // ... canvas be created
-          // this.suckerCanvas = canvas
-          // this.suckerArea = [x1, y1, x2, y2]
-        } else {
-          // this.suckerCanvas && this.suckerCanvas.remove
-        }
-      },
+      const { r, g, b, a } = color.rgba
+      this.color = `rgba(${r}, ${g}, ${b}, ${a})`
+      this.$emit('ColorChange', this.color)
+      this.currentcolor['background-color'] = this.color
+    },
+    openSucker(isOpen) {
+      // https://vuejsexamples.com/a-lightweight-color-picker-for-vue-3/
+      if (isOpen) {
+        // ... canvas be created
+        // this.suckerCanvas = canvas
+        // this.suckerArea = [x1, y1, x2, y2]
+      } else {
+        // this.suckerCanvas && this.suckerCanvas.remove
+      }
+    },
   }
 }
 </script>
