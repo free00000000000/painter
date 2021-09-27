@@ -2,11 +2,11 @@
   <input
   class="input"
   placeholder="Row"
-  @input="rowChange"/>
+  @blur="rowChange"/>
   <input
   class="input"
   placeholder="Column"
-  @input="colChange"/>
+  @blur="colChange"/>
   <button @click="clean" class="button">
     <svg-icon type="mdi" :path="mid_clean"/>
   </button>

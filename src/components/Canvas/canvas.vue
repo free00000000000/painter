@@ -22,13 +22,47 @@ export default {
   watch:{ 
     Row: function(newVal, oldVal){
       if(newVal != oldVal && !isNaN(newVal)){
+        // get context
+        let ctx = this.Canvas.getContext('2d')
+        // get present canvas
+        let image = ctx.getImageData(0, 0, this.Canvas.width, this.Canvas.height)
+        // change canvas size
         this.setCanvasSize(this.Col*this.Size, newVal*this.Size)
+        // clean canvas
+        this.cleanCanvas()
+        // put canvas
+        if(newVal > oldVal){ // new val is larger than old value
+          // place center
+          let offset = ((newVal - oldVal) / 2) * this.Size
+          ctx.putImageData(image, 0, offset)
+        }else{
+          // place (0,0)
+          ctx.putImageData(image, 0, 0)
+        }
+        // draw grid
         this.drawGrid(newVal, this.Col, this.Size, this.GridColor)
       }
     },
     Col: function(newVal, oldVal){
       if(newVal != oldVal && !isNaN(newVal)){
+        // get context
+        let ctx = this.Canvas.getContext('2d')
+        // get present canvas
+        let image = ctx.getImageData(0, 0, this.Canvas.width, this.Canvas.height)
+        // change canvas size
         this.setCanvasSize(newVal*this.Size, this.Row*this.Size)
+        // clean canvas
+        this.cleanCanvas()
+        // put canvas
+        if(newVal > oldVal){ // new val is larger than old value
+          // place center
+          let offset = ((newVal - oldVal) / 2) * this.Size
+          ctx.putImageData(image, offset, 0)
+        }else{
+          // place (0,0)
+          ctx.putImageData(image, 0, 0)
+        }
+        // draw grid
         this.drawGrid(this.Row, newVal, this.Size, this.GridColor)
       }
     }
