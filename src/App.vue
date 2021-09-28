@@ -38,11 +38,25 @@ export default {
   },
   methods: {
     modeChange(val){
-      if(this.Mode === 'Draw'){
-        this.Mode = val
-      }else if(this.Mode === 'Move'){
-        this.Mode = 'Draw'
+      // FSM[From][Get] = To
+      const mode_FSM = {
+        'Draw': {
+          'Draw': 'Draw',
+          'Move': 'Move',
+          'Fill': 'Fill',
+        },
+        'Move': {
+          'Draw': 'Draw',
+          'Move': 'Draw',
+          'Fill': 'Fill',
+        },
+        'Fill': {
+          'Draw': 'Draw',
+          'Move': 'Move',
+          'Fill': 'Draw',
+        },
       }
+      this.Mode = mode_FSM[this.Mode][val]
     },
   },
 }

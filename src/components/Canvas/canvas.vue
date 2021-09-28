@@ -83,6 +83,13 @@ export default {
       let y_idx = Math.floor(y / this.Size)
       return {x_idx, y_idx}
     },
+    getColorByLocation(x, y){
+      // get context
+      let ctx = this.Canvas.getContext('2d')
+      // get color
+      let colorData = ctx.getImageData(x, y, 1, 1).data
+      return [ colorData[0], colorData[1], colorData[2] ]
+    },
     mouseDown(event){
       event.preventDefault();
       this.isPress = true
@@ -100,6 +107,9 @@ export default {
         let pos = this.getClickLocation(event)
         let blk = this.getBlockByLocation(pos.x, pos.y)
         this.MoveOriginBlock = blk;
+      }else if(this.Mode === 'Fill'){
+        let pos = this.getClickLocation(event)
+        this.BFSCanvas(pos)
       }
     },
     mouseMove(event){
@@ -136,6 +146,47 @@ export default {
       if(this.isPress){
         this.isPress = false
       }
+    },
+    BFSCanvas(locate){
+      // get color of position
+      let targetColor = this.getColorByLocation(locate.x, locate.y)
+      // BFS
+      let x_offset = [0, 1, 0, -1]
+      let y_offset = [-1, 0, 1, 0]
+      let queue = [this.getBlockByLocation(locate.x, locate.y)]
+      let visited = Array(this.Col) // 2-D Array
+      for(let i = 0; i < this.Col; ++i){
+        visited[i] = Array.apply(null, Array(this.Row)).map(function () { return false; })
+      }
+      let colored = [] // need to be colored
+      while(queue.length > 0){
+        // front
+        let loc = queue.shift()
+        colored.push(loc) // colored
+        visited[loc.x_idx][loc.y_idx] = true // visited
+        // for each neightborhood
+        for(let dir = 0; dir < 4; ++dir){
+          let x_idx_new = loc.x_idx + x_offset[dir]
+          let y_idx_new = loc.y_idx + y_offset[dir]
+          if(x_idx_new >= 0 && x_idx_new < this.Col && y_idx_new >= 0 && y_idx_new < this.Row){ // check block valid
+            if(visited[x_idx_new][y_idx_new] === true){ // check if is visited
+              continue
+            }
+            let tmpColor = this.getColorByLocation(x_idx_new*this.Size + this.Size/2, y_idx_new*this.Size + this.Size/2) // this.Size/2: offset
+            if(JSON.stringify(targetColor) === JSON.stringify(tmpColor)){ // check color
+              queue.push({x_idx: x_idx_new, y_idx: y_idx_new})
+              visited[x_idx_new][y_idx_new] = true // visited
+            }
+          }
+        }
+      }
+      // color
+      colored.forEach(blk => {
+        this.drawRectangle(
+          {x: blk.x_idx * this.Size, y: blk.y_idx * this.Size},
+          {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, this.Color, false)
+      })
+      this.drawGrid(this.Row, this.Col, this.Size, this.GridColor)
     },
     MoveCanvas(locate){
       // get context

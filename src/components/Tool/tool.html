@@ -13,7 +13,8 @@
   <button @click="save" class="button">
     <svg-icon type="mdi" :path="mid_save"/>
   </button>
-  <label><input type="checkbox" @change="move">Move</label>
+  <label><input type="checkbox" @change="move" ref="moveCheckBox">Move</label>
+  <label><input type="checkbox" @change="fill" ref="fillCheckBox">Fill</label>
   <button 
     @click="hide = !hide" 
     class="button" 

@@ -27,7 +27,13 @@ export default {
       mid_save: mdiContentSave,
       mid_clean: mdiDelete,
       mdi_palette: mdiPalette,
+
+      tools: []
     }
+  },
+  mounted() {
+    this.tools.push(this.$refs['moveCheckBox'])
+    this.tools.push(this.$refs['fillCheckBox'])
   },
   methods: {
     rowChange(event){
@@ -42,8 +48,24 @@ export default {
     save(){
       this.$emit('Save')
     },
-    move(){
+    move(event){
+      if(event.target.checked){ // reset other
+        this.resetOtherTools(event.target)
+      }
       this.$emit('ModeChange', 'Move')
+    },
+    fill(event){
+      if(event.target.checked){ // reset other
+        this.resetOtherTools(event.target)
+      }
+      this.$emit('ModeChange', 'Fill')
+    },
+    resetOtherTools(target){
+      this.tools.forEach(tool => {
+        if(tool != target){ // reset
+          tool.checked = false;
+        }
+      })
     },
     changeColor(color) {
       const { r, g, b, a } = color.rgba
