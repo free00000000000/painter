@@ -1,7 +1,7 @@
 <script>
 export default {
   name: 'Canvas',
-  props: ['Color', 'Row', 'Col', 'isMoving', 'Mode'],
+  props: ['Color', 'BgColor', 'Row', 'Col', 'isMoving', 'Mode'],
   data: function(){
     return {
       Canvas: null,
@@ -110,6 +110,14 @@ export default {
       }else if(this.Mode === 'Fill'){
         let pos = this.getClickLocation(event)
         this.BFSCanvas(pos)
+      }else if(this.Mode === 'Erase'){
+        // draw color
+        let pos = this.getClickLocation(event)
+        let blk = this.getBlockByLocation(pos.x, pos.y)
+        this.drawRectangle(
+          {x: blk.x_idx * this.Size, y: blk.y_idx * this.Size},
+          {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, this.BgColor, false)
+        this.drawGrid(this.Row, this.Col, this.Size, this.GridColor)
       }
     },
     mouseMove(event){
@@ -135,6 +143,16 @@ export default {
             // reset
             this.MoveOriginBlock = blk;
           }
+        }else if(this.Mode === 'Fill'){
+          // do nothing
+        }else if(this.Mode === 'Erase'){
+          // draw color
+          let pos = this.getClickLocation(event)
+          let blk = this.getBlockByLocation(pos.x, pos.y)
+          this.drawRectangle(
+            {x: blk.x_idx * this.Size, y: blk.y_idx * this.Size},
+            {x: (blk.x_idx+1) * this.Size, y: (blk.y_idx+1) * this.Size}, this.BgColor, false)
+          this.drawGrid(this.Row, this.Col, this.Size, this.GridColor)
         }
       }
     },

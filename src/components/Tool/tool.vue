@@ -34,6 +34,7 @@ export default {
   mounted() {
     this.tools.push(this.$refs['moveCheckBox'])
     this.tools.push(this.$refs['fillCheckBox'])
+    this.tools.push(this.$refs['eraseCheckBox'])
   },
   methods: {
     rowChange(event){
@@ -53,6 +54,12 @@ export default {
         this.resetOtherTools(event.target)
       }
       this.$emit('ModeChange', 'Move')
+    },
+    erase(event){
+      if(event.target.checked){ // reset other
+        this.resetOtherTools(event.target)
+      }
+      this.$emit('ModeChange', 'Erase')
     },
     fill(event){
       if(event.target.checked){ // reset other

@@ -10,6 +10,7 @@
   <Canvas 
     ref = 'Canvas'
     :Color = 'Color'
+    :BgColor = 'BgColor'
     :Row = 'Row'
     :Col = 'Col'
     :isMoving = 'isMoving'
@@ -30,6 +31,7 @@ export default {
   data: function(){
     return {
       Color: 'red',
+      BgColor: 'white',
       Row: 20,
       Col: 20,
       isMoving: false,
@@ -44,16 +46,25 @@ export default {
           'Draw': 'Draw',
           'Move': 'Move',
           'Fill': 'Fill',
+          'Erase': 'Erase',
         },
         'Move': {
           'Draw': 'Draw',
           'Move': 'Draw',
           'Fill': 'Fill',
+          'Erase': 'Erase',
         },
         'Fill': {
           'Draw': 'Draw',
           'Move': 'Move',
           'Fill': 'Draw',
+          'Erase': 'Erase',
+        },
+        'Erase': {
+          'Draw': 'Draw',
+          'Move': 'Move',
+          'Fill': 'Fill',
+          'Erase': 'Draw',
         },
       }
       this.Mode = mode_FSM[this.Mode][val]
