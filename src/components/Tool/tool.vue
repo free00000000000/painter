@@ -49,6 +49,12 @@ export default {
     save(){
       this.$emit('Save')
     },
+    undo(){
+      this.$emit('Undo')
+    },
+    redo(){
+      this.$emit('Redo')
+    },
     move(event){
       if(event.target.checked){ // reset other
         this.resetOtherTools(event.target)

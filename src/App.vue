@@ -5,6 +5,8 @@
     @ColChange = 'Col = parseInt($event)'
     @Clean = '$refs.Canvas.cleanCanvas()'
     @Save = '$refs.Canvas.saveCanvas()'
+    @Undo = '$refs.Canvas.undoCanvas()'
+    @Redo = '$refs.Canvas.redoCanvas()'
     @ModeChange = 'modeChange($event)'
   />
   <Canvas 

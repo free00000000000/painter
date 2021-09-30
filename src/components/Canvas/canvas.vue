@@ -14,10 +14,17 @@ export default {
   },
   mounted() {
     this.Canvas = this.$refs.drawCanvas
+
+    // add listener
+    // state change (undo or redo)
+    window.addEventListener('popstate', this.changeCanvas, false)
+
     // set size
     this.setCanvasSize(this.Col*this.Size, this.Row*this.Size) 
     // draw
     this.drawGrid(this.Row, this.Col, this.Size, this.GridColor)
+    // pust canvas into stack
+    this.pushCanvas()
   },
   watch:{ 
     Row: function(newVal, oldVal){
@@ -159,10 +166,34 @@ export default {
     mouseUp(){
       this.isPress = false
       this.MoveOriginBlock = null
+      this.pushCanvas() // pust canvas into stack
     },
     mouseOut(){
       if(this.isPress){
         this.isPress = false
+        this.pushCanvas() // pust canvas into stack
+      }
+    },
+    undoCanvas(){
+      window.history.back()
+    },
+    redoCanvas(){
+      window.history.forward()
+    },
+    pushCanvas(){
+      // get context
+      let ctx = this.Canvas.getContext('2d')
+      let state = ctx.getImageData(0, 0, this.Canvas.width, this.Canvas.height)
+      window.history.pushState(state, null);
+    },
+    changeCanvas(event){
+      // get context
+      let ctx = this.Canvas.getContext('2d')
+      // clean canvas
+      ctx.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
+      // replace
+      if(event.state){
+        ctx.putImageData(event.state, 0, 0);
       }
     },
     BFSCanvas(locate){

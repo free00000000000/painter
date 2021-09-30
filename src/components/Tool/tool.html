@@ -16,7 +16,9 @@
   <label><input type="checkbox" @change="move" ref="moveCheckBox">Move</label>
   <label><input type="checkbox" @change="fill" ref="fillCheckBox">Fill</label>
   <label><input type="checkbox" @change="erase" ref="eraseCheckBox">Erase</label>
-  <button 
+  <button @click="undo" class="button">Undo</button>
+  <button @click="redo" class="button">Redo</button>
+  <button
     @click="hide = !hide" 
     class="button" 
     :style="currentcolor"
